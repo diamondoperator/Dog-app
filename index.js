@@ -15,6 +15,10 @@
 function getDogImage() {
   //get number entered from text field
   let dogs= $('#random-dogs').val();
+
+  //get dogbreed name
+//substitute "random" for ${dogbreedname}
+  
   //pass the number to the fetch to get that number of dog urls
   fetch(`https://dog.ceo/api/breeds/image/random/${dogs}`)
     .then(response => response.json())
@@ -24,15 +28,24 @@ function getDogImage() {
 }
 
 //need an array of urls the length of $('#random-dogs').val();
-let urlArray = 
+//let urlArray = 
 
 function displayResults(responseJson) {
   console.log(responseJson);
-  //for(let i = 0; i <)
-  //replace the existing image with the new one
-  $('.results-img').replaceWith(
-    `<img src="${responseJson.message}" class="results-img">`
-  )
+
+  //clear all the images from the previous display of images
+$(".results-img").remove();
+
+//loop through json messages and append them (images) to the "results"
+for(let i = 0; i <responseJson.message.length; i++)
+{
+  $('.results').append(`<img src="${responseJson.message[i]}" class="results-img">`);
+}
+
+  // //replace the existing image with the new one
+  // $('.results-img').replaceWith(
+  //   `<img src="${responseJson.message}" class="results-img">`
+  // )
   //display the results section
   $('.results').removeClass('hidden');
 }
